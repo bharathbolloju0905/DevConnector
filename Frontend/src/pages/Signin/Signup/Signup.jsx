@@ -1,8 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import SignupHook from '../../../hooks/SignUp'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
+    const { signup, loading } = SignupHook();
+    const navigate = useNavigate();
     const [input , setInput] = useState({
         fullname: "",
         email: "",
@@ -20,7 +25,9 @@ const Signup = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(input);
-        // navigate("/signin")
+        signup(input) ;
+         toast.success('Sign up successful');
+        navigate('/home') ;
     }
   return (
     <div className='h-screen w-full flex '>
@@ -45,8 +52,8 @@ const Signup = () => {
                     <label htmlFor="Password" className='text-sm text-gray-600'>Confirm Password</label>
                     <input type="password" name="confirmpassword" id="confirmpassword" className='w-full h-12 border border-gray-300 rounded-md px-4 bg-white' placeholder='Confirm your password' value={input.confirmpassword} onChange={handleChange} required />
 
-                    <button  type="submit" className='w-full h-12 bg-[#4C4EE7] text-white rounded-md font-bold mt-5'>Create Account</button>
-                    <p className='text-sm text-gray-500 text-center'>Already have an account? <a href="/signin" className='text-[#4C4EE7] font-bold'>Sign In</a></p>
+                    <button  type="submit" className='w-full h-12 bg-[#4C4EE7] text-white rounded-md font-bold mt-5'>{loading? "Loading..." :"Create Account"}</button>
+                    <p className='text-sm text-gray-500 text-center'>Already have an account? <Link to="/signin" className='text-[#4C4EE7] font-bold'>Sign In</Link></p>
                 </form>
             </div>
 
@@ -64,7 +71,7 @@ const Signup = () => {
 
             <div className='w-full flex  items-start justify-center gap-4 font-semibold'>
                <button className='bg-white p-[10px] text-[#4C4EE7] rounded-md'><a href="/learn">View Features</a></button>
-              <button className='border-[1px] border-white p-[10px]  rounded-md text-white '><a href="/learn">Success Stories</a></button>
+              <button className='border-[1px] border-white p-[10px]  rounded-md text-white '><Link to="/learn">Success Stories</Link></button>
             </div>
         </div>
     </div>

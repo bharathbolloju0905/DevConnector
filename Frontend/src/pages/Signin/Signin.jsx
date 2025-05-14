@@ -1,6 +1,12 @@
 import React from 'react'
-
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import SigninHook from '../../hooks/Signin'
+import { Link } from 'react-router-dom';
 const Signin = () => {
+    const navigate = useNavigate();
+    const { signin, loading } = SigninHook();
     const [input, setinput] = useState({
         email: "",
         password: ""
@@ -14,6 +20,7 @@ const Signin = () => {
     function handleSubmit(e) {
         e.preventDefault();
         console.log(input);
+        signin(input);
     }
 
     return (
@@ -26,7 +33,7 @@ const Signin = () => {
                     </div>
                     <div className='w-full '>
                         <h2 className='text-2xl font-bold'>Welcome Back !</h2>
-                        <form className='w-full flex flex-col gap-4 mt-4'>
+                        <form className='w-full flex flex-col gap-4 mt-4' onSubmit={handleSubmit}>
 
                             <label htmlFor="Email" className='text-sm text-gray-600'>Email address</label>
                             <input type="email" name="email" id="email" className='w-full h-12 border border-gray-300 rounded-md px-4 bg-white' placeholder='Enter your email address' value={input.email} onChange={handleChange} required />
@@ -35,7 +42,7 @@ const Signin = () => {
                             <input type="password" name="password" id="password" className='w-full h-12 border border-gray-300 rounded-md px-4 bg-white' placeholder='Enter your password' value={input.password} onChange={handleChange} required />
                             <button type="submit" onSubmit={handleSubmit
                             } className='w-full h-12 bg-[#4C4EE7] text-white rounded-md font-bold mt-5'>Sign In</button>
-                            <p className='text-sm text-gray-500 text-center'>Don't have an account? <a href="/signup" className='text-[#4C4EE7] font-bold'>Sign Up</a></p>
+                            <p className='text-sm text-gray-500 text-center'>Don't have an account? <Link to="/signup" className='text-[#4C4EE7] font-bold'>Sign Up</Link></p>
                         </form>
                     </div>
 

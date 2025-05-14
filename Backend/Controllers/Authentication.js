@@ -80,8 +80,8 @@ module.exports.login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(400).json({ message: 'Invalid password' });
         }
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.cookie('token', token, {
+        const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      await res.cookie('token', token, {
             httpOnly: true,
         });
         res.status(200).json({

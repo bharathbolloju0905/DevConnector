@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authenticateController = require('../Controllers/Authentication');
-const authenticateMiddleware = require('../Middlewares/authenticateMiddleware');
+const authenticateMiddleware = require('../middlewares/authenticateMiddleware');
 
 router.get('/', (req, res) => {
     res.send('Authentication Route');
