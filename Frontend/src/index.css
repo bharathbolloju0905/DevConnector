@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+    
+}

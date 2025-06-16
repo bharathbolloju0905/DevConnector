@@ -22,12 +22,10 @@ const Signup = () => {
         });
 
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         console.log(input);
-        signup(input) ;
-         toast.success('Sign up successful');
-        navigate('/home') ;
+        await signup(input) ;
     }
   return (
     <div className='h-screen w-full flex '>
@@ -52,7 +50,7 @@ const Signup = () => {
                     <label htmlFor="Password" className='text-sm text-gray-600'>Confirm Password</label>
                     <input type="password" name="confirmpassword" id="confirmpassword" className='w-full h-12 border border-gray-300 rounded-md px-4 bg-white' placeholder='Confirm your password' value={input.confirmpassword} onChange={handleChange} required />
 
-                    <button  type="submit" className='w-full h-12 bg-[#4C4EE7] text-white rounded-md font-bold mt-5'>{loading? "Loading..." :"Create Account"}</button>
+                    <button  type="submit" className='w-full h-12 bg-[#4C4EE7] text-white rounded-md font-bold mt-5 cursor-pointer'>{loading? "Loading..." :"Create Account"}</button>
                     <p className='text-sm text-gray-500 text-center'>Already have an account? <Link to="/signin" className='text-[#4C4EE7] font-bold'>Sign In</Link></p>
                 </form>
             </div>

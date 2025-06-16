@@ -21,18 +21,14 @@ module.exports.register = async (req, res) => {
         email,
         password: hashedPassword,
     });
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
         res.cookie('token', token, {
         httpOnly: true,
         });
 
     res.status(201).json({
         message: 'User created successfully',
-        user: {
-            id: user._id,
-            fullname: user.fullname,
-            email: user.email,
-        },
+        user,
         token,
     });
     } catch (error) {
@@ -51,7 +47,7 @@ const Validate = (fullname, email, password, confirmpassword) => {
     if (password !== confirmpassword) {
         return false;
     }
-    if (password.length < 8) {
+    if (password.length < 6) { // Changed to 6 to match frontend
         return false;
     }
     if(password.includes(' ')) {
@@ -67,6 +63,7 @@ const Validate = (fullname, email, password, confirmpassword) => {
 }
 
 module.exports.login = async (req, res) => {
+    console.log("Iam running...")
     const { email, password } = req.body;
     if (!email || !password) {
         return res.status(400).json({ message: 'Invalid input' });
@@ -80,17 +77,13 @@ module.exports.login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(400).json({ message: 'Invalid password' });
         }
-        const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token =  jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
       await res.cookie('token', token, {
             httpOnly: true,
         });
         res.status(200).json({
             message: 'Login successful',
-            user: {
-                id: user._id,
-                fullname: user.fullname,
-                email: user.email,
-            },
+            user,
             token,
         });
     } catch (error) {
@@ -111,19 +104,31 @@ module.exports.logout = async (req, res) => {
 
 module.exports.getUser = async (req, res) => {
     try {
+        const user = await UserModel.findById(req.user.id).populate('posts');
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        user.password = undefined ;
+        res.status(200).json({user});
+    } catch (error) {
+        console.error('Error fetching user:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+}
+module.exports.getPeopleYouKnow = async (req, res) => {
+    try {
         const user = await UserModel.findById(req.user.id);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        res.status(200).json({
-            user: {
-                id: user._id,
-                fullname: user.fullname,
-                email: user.email,
-            },
-        });
+        const peopleYouKnow = await UserModel.find({
+            _id: { $ne: user._id },
+            skills: { $elemMatch: { $in: user.skills } },
+        }).limit(5);
+        console.log('People you know:', peopleYouKnow);
+      return res.status(200).json({ peopleYouKnow });
     } catch (error) {
-        console.error('Error fetching user:', error);
+        console.error('Error fetching people you know:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 }

@@ -5,6 +5,7 @@ import App from './App.jsx'
 import { Toaster } from 'react-hot-toast'
 import { BrowserRouter } from 'react-router-dom'
 import {UserContextProvider} from './Context/UserContext.jsx'
+import { SocketProvider } from './Context/SocketContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -14,7 +15,9 @@ createRoot(document.getElementById('root')).render(
     />
     <BrowserRouter>
       <UserContextProvider>
+      <SocketProvider>
         <App />
+      </SocketProvider>
       </UserContextProvider>
     </BrowserRouter>
   </StrictMode>,

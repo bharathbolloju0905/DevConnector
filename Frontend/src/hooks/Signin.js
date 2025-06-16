@@ -14,7 +14,7 @@ const SigninHook = () => {
         }
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:3000/api/login', {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const SigninHook = () => {
             }
             console.log(data);
         } catch (error) {
-            navigate('/');
+            navigate('/signin');
             toast.error('Invalid email or password');
             console.error("error im signin",error);
         } finally {

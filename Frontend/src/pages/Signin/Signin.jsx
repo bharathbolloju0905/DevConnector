@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import SigninHook from '../../hooks/Signin'
 import { Link } from 'react-router-dom';
 const Signin = () => {
-    const navigate = useNavigate();
+  
     const { signin, loading } = SigninHook();
     const [input, setinput] = useState({
         email: "",
@@ -17,10 +17,10 @@ const Signin = () => {
             [e.target.name]: e.target.value
         })
     }
-    function handleSubmit(e) {
+  async function handleSubmit(e) {
         e.preventDefault();
         console.log(input);
-        signin(input);
+       await signin(input);
     }
 
     return (
@@ -41,7 +41,7 @@ const Signin = () => {
                             <label htmlFor="Password" className='text-sm text-gray-600'>Password</label>
                             <input type="password" name="password" id="password" className='w-full h-12 border border-gray-300 rounded-md px-4 bg-white' placeholder='Enter your password' value={input.password} onChange={handleChange} required />
                             <button type="submit" onSubmit={handleSubmit
-                            } className='w-full h-12 bg-[#4C4EE7] text-white rounded-md font-bold mt-5'>Sign In</button>
+                            } disabled={loading} className='w-full h-12 bg-[#4C4EE7] text-white rounded-md font-bold mt-5 cursor-pointer'>{loading?"Loading...":"Sign In"}</button>
                             <p className='text-sm text-gray-500 text-center'>Don't have an account? <Link to="/signup" className='text-[#4C4EE7] font-bold'>Sign Up</Link></p>
                         </form>
                     </div>

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useUserContext } from '../Context/UserContext';
+import {useNavigate} from "react-router-dom"
 const SignUpHook = () => {
     const [loading, setLoading] = useState(false);
     const { setUser } = useUserContext();
+    const navigate = useNavigate();
 
     const signup = async ({fullname ,email,password,confirmpassword}) => {
         const isValid = validateForm(fullname, email, password, confirmpassword);
@@ -31,9 +33,11 @@ const SignUpHook = () => {
             if (data.user) {
                 setUser(data.user);
                 toast.success('Sign up successful');
+                navigate("/home")
+                
             } else {
                 toast.error('Sign up failed');
-                Navigate("/")
+                navigate("/")
             }
         } catch (error) {
             console.error(error);

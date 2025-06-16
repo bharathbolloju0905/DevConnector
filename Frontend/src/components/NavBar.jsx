@@ -1,0 +1,101 @@
+import React, { useEffect } from 'react'
+import { CiSearch } from "react-icons/ci";
+import { FaBell } from "react-icons/fa6";
+import { IoIosArrowDown } from "react-icons/io";
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useUserContext } from '../Context/UserContext';
+import axios from "axios";
+const NavBar = ({ setPosts, posts }) => {
+  const { user } = useUserContext();
+  const [isOpen, setIsOpen] = useState(false);
+  const [input, setInput] = useState('');
+  const [localpost, setLocalPost] = useState(posts);
+  useEffect(() => {
+
+
+    const getUnreadNotifications = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/messages/unread-count`, {
+          withCredentials: true,
+        });
+        if (response.status !== 200) {
+          throw new Error('Failed to fetch unread notifications');
+        }
+        const data = response.data;
+        console.log('Unread notifications:', data);
+      } catch (error) {
+        console.error('Error fetching unread notifications:', error);
+      }
+    };
+
+    getUnreadNotifications();
+  }, [user]);
+
+  function handleChange(e) {
+    const value = e.target.value;
+    setInput(value);
+
+    if (value.length === 0) {
+      // Reset posts to original state if input is cleared
+      setLocalPost(posts);
+      setPosts(posts); // Also update the parent posts if needed
+      return;
+    }
+
+    if (value.length > 3) {
+      const filtered = posts.filter((post) => {
+        return post.description.toLowerCase().includes(value.toLowerCase());
+      });
+      setLocalPost(filtered);
+      setPosts(filtered); // Also update the parent posts if needed
+    }
+  }
+
+  return (
+    <div className='w-full md:h-14 h-12 flex items-center justify-between md:px-4 fixed bg-white z-10 shadow-md '>
+      <div>
+        <h1 className="text-[#4C4EE7] text-sm md:text-xl lg:text-2xl font-bold">
+          <span className='text-sm md:text-xl lg:text-2xl font-bold'>&lt;</span>DevConnector/<span className='text-sm md:text-xl lg:text-2xl font-bold'>&gt;</span>
+        </h1>
+      </div>
+
+      <div className='relative w-1/3'>
+        <CiSearch className='absolute text-gray-500 top-1 left-4 md:h-6 md:w-6 h-4 w-4  top-4  font-bold' />
+        <input
+          className='w-full md:text-lg md:pl-[3rem] pl-[1rem] text-xs border border-black rounded-md text-gray-800 focus:border-purple-500'
+          type="text"
+          placeholder='Search for post , friends or topics...'
+          value={input}
+          onChange={handleChange}
+
+        />
+      </div>
+
+      <div className="flex justify-center items-center md:gap-3 gap-[1px]">
+        <FaBell className='text-gray-500 h-[15px] w-[15px] md:h-[20px] md:w-[20px] font-bold' />
+
+
+        <div >
+          <img className='md:h-[30px] md:w-[30px] w-[20px] h-[20px] rounded-full' src={`${import.meta.env.VITE_BASE_URL}${user?.profilepic}`}
+            alt="user" />
+        </div>
+        <div className='flex '>
+          <h1 className='text-gray-800 font-semibold text-md hidden md:flex lg:flex'>{user?.fullname}</h1>
+          <IoIosArrowDown className='text-gray-500 md:h-[25px] md:w-[25px] h-[20px] w-[20px] font-bold cursor-pointer' onClick={() => setIsOpen(!isOpen)} />
+        </div>
+      </div>
+
+      <div className={`absolute right-[5rem] z-11 top-[4rem] bg-white shadow-lg rounded-md p-1 w-40 group-hover:block ${isOpen ? 'block' : 'hidden'}`}>
+        <ul className='flex flex-col gap-2 w-full justify-center'>
+          <li className='hover:bg-gray-100 w-full m-1'><Link to='/profile'>Your Profile</Link></li>
+          <li className='hover:bg-gray-100 w-full m-1'><Link to='/settings'>Settings</Link></li>
+          <li className='hover:bg-gray-100 w-full m-1'><Link to='/logout'>Logout</Link></li>
+        </ul>
+      </div>
+    </div >
+
+
+  );
+}
+export default NavBar
