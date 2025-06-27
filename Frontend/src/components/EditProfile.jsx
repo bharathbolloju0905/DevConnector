@@ -79,15 +79,15 @@ const EditProfile = () => {
     };
 
     return (
-        <div className={`absolute top-10 left-[20%] w-[60%] bg-white flex flex-col items-start justify-center rounded-lg p-4 mt-4  shadow-2xl ${!isopen && "hidden"}`}>
+        <div className={`absolute top-10 left-[5%] md:left-[20%] w-[90%] md:w-[60%] bg-white flex flex-col items-start justify-center rounded-lg p-4 mt-4 h-full shadow-2xl ${!isopen && "hidden"}`}>
             <h1 className="text-gray-800 font-semibold text-xl">Edit Profile</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='w-full h-full overflow-y-auto'>
                 <RxCross2 className='h-5 w-5 absolute top-2 right-2 cursor-pointer' onClick={() => setisopen(!isopen)} />
-                <div className='flex gap-2 mt-4'>
+                <div className='flex flex-col md:flex-row justify-center w-full gap-2 mt-4'>
                     <div>
                         <img className='h-25 w-25 rounded-full' src={`${import.meta.env.VITE_BASE_URL}${user?.profilepic}`} alt="" />
                     </div>
-                    <div className='flex flex-col items-start justify-center'>
+                    <div className='flex flex-col items-start justify-center '>
                         <h2 className='text-lg font-semibold'>Profile photo</h2>
                         <p className='text-gray-800 text-[12px]'>Recommended: Square image, at least 400x400px</p>
                         <input
@@ -106,20 +106,20 @@ const EditProfile = () => {
                     </div>
 
                 </div>
-                <div className='flex  flex-wrap gap-2 mt-4 w-full justify-center '>
-                    <div className='w-[49%]'>
+                <div className='flex flex-col md:flex-row flex-wrap gap-2 mt-4 w-full justify-center '>
+                    <div className='md:w-[49%] w-full'>
                         <label htmlFor="Full name" className='text-black font-semibold'>Full name</label> <br />
                         <input className='border-[1px] border-gray-300 rounded-lg p-1  pl-3 w-full focus:border-[1px] focus:border-amber-400' type="text" name="fullname" placeholder='Full name' required value={inputdetails.fullname} onChange={handleChange} />
                     </div>
-                    <div className='w-[49%]'>
+                    <div className='md:w-[49%] w-full'>
                         <label htmlFor="Proffession" className='text-black font-semibold'>Proffession</label> <br />
                         <input type="text" className='border-1 border-gray-300 rounded-lg p-1 pl-3 w-full' placeholder='Proffessional Tile' required value={inputdetails.profession} name="profession" onChange={handleChange} />
                     </div>
-                    <div className='w-[49%]'>
+                    <div className='md:w-[49%] w-full'>
                         <label htmlFor="email" className='text-black font-semibold'>Email</label> <br />
                         <input type="email" className='border-1 border-gray-300 rounded-lg p-1 pl-3 w-full' placeholder='email' required value={inputdetails.email} name='email' onChange={handleChange} />
                     </div>
-                    <div className='w-[49%]'>
+                    <div className='md:w-[49%] w-full'>
                         <label htmlFor="email" className='text-black font-semibold'>Location</label> <br />
                         <input type="text" className='border-1 border-gray-300 rounded-lg p-1 pl-3 w-full' placeholder='Location' name='address' value={inputdetails.address} onChange={handleChange} required/>
                     </div>
@@ -128,11 +128,11 @@ const EditProfile = () => {
                         <textarea className='border-1 border-gray-300 rounded-lg p-1 pl-3 w-full' name="bio" id="" cols="20" rows="10" placeholder='Bio' onChange={handleChange} value={inputdetails.bio}>{user?.bio}</textarea>
                     </div>
 
-                    <div className='w-[49%]'>
+                    <div className='md:w-[49%] w-full'>
                         <label htmlFor="website" className='text-black font-semibold'>Personal Website</label> <br />
                         <input type="text" className='border-1 border-gray-300 rounded-lg p-1 pl-3 w-full' placeholder='Website' name='website' onChange={handleChange} value={inputdetails?.website} required/>
                     </div>
-                    <div className='w-[49%]'>
+                    <div className='md:w-[49%] w-full'>
                         <label htmlFor="Github" className='text-black font-semibold'>GitHub</label> <br />
                         <input type="text" className='border-1 border-gray-300 rounded-lg p-1 pl-3 w-full' placeholder='GithUb profile' value={inputdetails?.github} name='github' onChange={handleChange} required/>
                     </div>
@@ -198,7 +198,7 @@ const EditProfile = () => {
                         <p className="text-[12px] text-gray-800">Add your work experience</p>
                         <ExperienceSection experience={experience} setExperience={setExperience} />
                     </div>
-                    < button disabled={loading} type="submit" className="bg-[#4C4EE7] px-4 py-2 font-semibold text-white rounded-lg cursor-pointer ">
+                    < button disabled={loading} type="submit" className="bg-[#4C4EE7] px-4 py-2 font-semibold mb-4 text-white rounded-lg cursor-pointer ">
                       {!loading ?  "Save & Update" : "Updating..."}
                     </button>
                 </div>

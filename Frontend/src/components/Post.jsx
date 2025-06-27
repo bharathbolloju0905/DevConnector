@@ -4,7 +4,7 @@ import { FiMessageCircle } from "react-icons/fi";
 import { VscHeartFilled } from "react-icons/vsc";
 import axios from 'axios'
 import { useState } from 'react';
-import {useUserContext} from '../context/UserContext';
+import {useUserContext} from '../Context/UserContext';
 
 const Post = ({post}) => {
     const {user} = useUserContext();
@@ -38,7 +38,7 @@ catch(err){
             <div > 
                 <p className='text-ellipsis w-full overflow-hidden text-sm'>{post?.description}</p>
             </div>
-        <div className='h-[300px] w-[90%] '>
+        <div className='h-[300px] md:h-[350px] w-[90%] '>
             <img className='h-full w-full rounded-md m-2 object-fit' src={`${import.meta.env.VITE_BASE_URL}${post?.image}`} alt="" />
         </div>
         <div className='flex items-center gap-4 w-full h-12 mt-4'>

@@ -17,18 +17,18 @@ const Profile = () => {
  
   return (
     <div className="flex flex-col w-fulll h-screen ">
-      <Link to="/home"><FaArrowLeftLong className="bg-[#4C4EE7] text-white rounded-full h-8 w-8 absolute top-4 left-4 p-2" /></Link>
+      <Link to="/home"><FaArrowLeftLong className="bg-[#4C4EE7] text-white rounded-full h-10 w-10 md:h-8 md:w-8 absolute top-4 left-4 p-2" /></Link>
       {isopen && <EditProfile></EditProfile>}
-      <div className="w-full h-[40%] bg-[#3b3fd9] flex items-end justify-center p-10  pb-3">
+      <div className="w-full h-fit md:h-[40%] bg-[#3b3fd9] flex flex-col justify-center items-center md:items-start md:justify-center p-10  pb-3">
         <img
           className="h-32 w-32 rounded-full"
           src={`${import.meta.env.VITE_BASE_URL}${user?.profilepic}`}
           alt="profile img"
         />
-        <div className="w-full flex justify-between">
-          <div className="ml-4 w-full">
-            <h1 className="text-white font-semibold text-2xl">{user?.fullname}</h1>
-            <div className="flex gap-4 mt-2 w-full justify-between">
+        <div className="w-full flex justify-center items-center md:justify-between">
+          <div className="ml-4 w-full flex justify-center items-center flex-col md:items-start">
+            <h1 className="text-white font-semibold text-2xl ">{user?.fullname}</h1>
+            <div className="flex gap-4 mt-2 w-full flex-col items-center md:flex-row md:justify-between ">
               <div>
                 <p className="text-white text-lg">{user?.profession}</p>
                 <p className="text-white flex justify-center items-center text-sm"> <FaLocationDot className="h-4 w-4 mr-1" /> {user?.contact.address}</p>
@@ -42,8 +42,8 @@ const Profile = () => {
         </div>
 
       </div>
-      <div className="w-full flex items-center justify-center p-10 mt-4 g-3">
-        <div className="w-[30%] flex flex-col gap-3 items-center justify-start h-full">
+      <div className="w-full flex flex-col md:flex-row md:items-center md:justify-center p-10 mt-4 g-3">
+        <div className="w-full md:w-[30%] flex flex-col gap-3 items-center justify-start h-full">
           <div className="w-full h-fit bg-white shadow-lg rounded-lg p-4">
             <h1 className="text-gray-800 font-semibold text-xl">About</h1>
             <p className="text-gray-500 text-[14px] mt-2">{user?.bio}</p>
@@ -80,7 +80,7 @@ const Profile = () => {
 
         </div>
 
-        <div className="w-[60%] gap-3 flex flex-col justify-start items-center ml-4 h-full ">
+        <div className=" w-full md:w-[60%] gap-3 flex flex-col justify-start items-center md:ml-4 h-full ">
           {/* Experience */}
           <div className="w-full h-fit bg-white shadow-lg rounded-lg p-4">
             <h1 className="text-gray-800 font-semibold text-xl">Experience</h1>
@@ -140,12 +140,12 @@ const Profile = () => {
           </div>
 
           {/* Projects  or Posts */}
-          <div className="w-full h-fit bg-white shadow-lg rounded-lg p-4 mt-4">
+          <div className="w-full h-[400px] bg-white shadow-lg rounded-lg p-4 mt-4 ">
             <h1 className="text-gray-800 font-semibold text-xl">Post</h1>
-            <div className="flex flex-wrap w-full gap-4 mt-2">
+            <div className="flex flex-wrap w-full gap-4 mt-2 overflow-y-auto h-full">
               {
                 user?.posts?.map((post, index) => (
-                  <div className='w-[45%]  bg-white shadow-lg rounded-lg p-4' key={index}>
+                  <div className='w-full md:w-[45%]  bg-white shadow-lg rounded-lg p-4' key={index}>
                     <img className="w-full rounded-lg" src={`${import.meta.env.VITE_BASE_URL}${post?.image}`} alt="project img" />
                     <h1 className="text-gray-800 font-semibold text-lg">Post 1</h1>
                     <p className="text-gray-500 text-[14px]">{post.description}</p>

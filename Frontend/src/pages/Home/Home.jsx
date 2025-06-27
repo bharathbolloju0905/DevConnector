@@ -48,13 +48,13 @@ useEffect(() => {
   return (
     <div className='w-full h-screen  flex flex-col '>
       <NavBar setPosts={setPosts} posts={posts}/>
-      <div className='w-full h-full flex items-center justify-between mt-[70px]'>
-        <div className='w-1/4 h-full  flex  justify-center relative'>
+      <div className='w-full h-full flex items-center justify-between mt-[40px] md:mt-[70px] md:justify-center'>
+        <div className='w-1/4 h-full  hidden lg:flex  justify-center relative'>
           <SideProfile />
         </div>
 
          {createpost && <CreatePostForm />}
-        <div className='w-[40%] h-full  flex flex-col items-center justify-start relative overflow-y-scroll pl-4 pr-4 hide-scroll'>
+        <div className='w-full md:w-[70%] lg:w-[40%] h-full  flex flex-col items-center justify-start relative overflow-y-scroll pl-4 pr-4 hide-scroll'>
           <FeedNavigation></FeedNavigation>
           <CreatePost setcreatepost = {setcreatepost} createpost={createpost}></CreatePost>
           {posts?.map((post) => (
@@ -62,7 +62,7 @@ useEffect(() => {
           ))}
         
         </div>
-        <div className='w-1/4 h-full flex items-center  flex-col gap-4 '>
+        <div className='hidden lg:w-1/4 h-full lg:flex items-center  flex-col gap-4 '>
 
           <Trending></Trending>
           <PeopleYouKnow></PeopleYouKnow>

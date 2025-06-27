@@ -10,9 +10,9 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import {useNavigate} from "react-router-dom"
-import {useUserContext} from "../../context/UserContext";
+import {useUserContext} from "../../Context/UserContext";
 import axios from "axios";
-import { useSocketContext } from "../../context/SocketContext";
+import { useSocketContext } from "../../Context/SocketContext";
 
 const ProfileDetails = () => {
     const location = useLocation();
@@ -60,16 +60,16 @@ const [isConnected, setIsConnected] = useState(false);
      <div className="flex flex-col w-fulll h-screen ">
           <Link to="/home"><FaArrowLeftLong className="bg-[#4C4EE7] text-white rounded-full h-8 w-8 absolute top-4 left-4 p-2" /></Link>
    
-          <div className="w-full h-[40%] bg-[#3b3fd9] flex items-end justify-center p-10  pb-3">
+          <div className="w-full h-fit md:h-[40%] bg-[#3b3fd9] flex flex-col items-center md:flex-row md:items-end justify-center p-10  pb-3">
             <img
               className="h-32 w-32 rounded-full"
               src={`${import.meta.env.VITE_BASE_URL}${person?.profilepic}`}
               alt="profile img"
             />
-            <div className="w-full flex justify-between">
-              <div className="ml-4 w-full">
+            <div className="w-full flex flex-col  md:justify-between">
+              <div className="ml-4 w-full flex flex-col items-center md:items-start">
                 <h1 className="text-white font-semibold text-2xl">{person?.fullname}</h1>
-                <div className="flex gap-4 mt-2 w-full justify-between">
+                <div className="flex flex-col md:flex-row items-center gap-4 mt-2 w-full md:justify-between">
                   <div>
                     <p className="text-white text-lg">{person?.profession}</p>
                     <p className="text-white flex justify-center items-center text-sm"> <FaLocationDot className="h-4 w-4 mr-1" /> {person?.contact.address}</p>
@@ -84,8 +84,8 @@ const [isConnected, setIsConnected] = useState(false);
             </div>
     
           </div>
-          <div className="w-full flex items-center justify-center p-10 mt-4 g-3">
-            <div className="w-[30%] flex flex-col gap-3 items-center justify-start h-full">
+          <div className="w-full flex flex-col md:flex-row items-center justify-center p-5 md:p-10 mt-4 g-3">
+            <div className="w-full md:w-[30%] flex flex-col gap-3 items-center justify-start h-full">
               <div className="w-full h-fit bg-white shadow-lg rounded-lg p-4">
                 <h1 className="text-gray-800 font-semibold text-xl">About</h1>
                 <p className="text-gray-500 text-[14px] mt-2">{person?.bio}</p>
@@ -122,7 +122,7 @@ const [isConnected, setIsConnected] = useState(false);
     
             </div>
     
-            <div className="w-[60%] gap-3 flex flex-col justify-start items-center ml-4 h-full ">
+            <div className="w-full md:w-[60%] gap-3 flex flex-col justify-start items-center md:ml-4 h-full ">
               {/* Experience */}
               <div className="w-full h-fit bg-white shadow-lg rounded-lg p-4">
                 <h1 className="text-gray-800 font-semibold text-xl">Experience</h1>
@@ -182,32 +182,34 @@ const [isConnected, setIsConnected] = useState(false);
               </div>
     
               {/* Projects  or Posts */}
-              <div className="w-full h-fit bg-white shadow-lg rounded-lg p-4 mt-4">
-                <h1 className="text-gray-800 font-semibold text-xl">Post</h1>
-                <div className="flex flex-wrap w-full gap-4 mt-2">
-                  {
-                    person?.posts?.map((post, index) => (
-                      <div className='w-[45%]  bg-white shadow-lg rounded-lg p-4' key={index}>
-                        <img className="w-full rounded-lg" src={`${import.meta.env.VITE_BASE_URL}${post?.image}`} alt="project img" />
-                        <h1 className="text-gray-800 font-semibold text-lg">Post 1</h1>
-                        <p className="text-gray-500 text-[14px]">{post.description}</p>
-                        <p className="text-gray-800 text-[14px] font-semibold "> <span>{post?.likes?.length} likes</span> <span>{post?.comments?.length} comments</span> </p>
-                      </div> ))
-                  }
-                  {/* <div className='w-[45%]  bg-white shadow-lg rounded-lg p-4'>
-                    <img className="w-full rounded-lg" src="https://sailingwithmasters.com/wp-content/uploads/2020/07/kung-fu-panda-oogway-prophecy.jpg?w=640" alt="project img" />
+              <div className="w-full h-[400px] bg-white shadow-lg rounded-lg p-4 mt-4 ">
+            <h1 className="text-gray-800 font-semibold text-xl">Post</h1>
+            <div className="flex flex-wrap w-full gap-4 mt-2 overflow-y-auto h-full">
+              {
+                person?.posts?.map((post, index) => (
+                  <div className='w-full md:w-[45%]  bg-white shadow-lg rounded-lg p-4' key={index}>
+                    <img className="w-full rounded-lg" src={`${import.meta.env.VITE_BASE_URL}${post?.image}`} alt="project img" />
                     <h1 className="text-gray-800 font-semibold text-lg">Post 1</h1>
-                    <p className="text-gray-500 text-[14px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</p>
-                    <p className="text-gray-800 text-[14px] font-semibold "> <span>200 likes</span> <span>134 comments</span> </p>
-                  </div>
-                  <div className='w-[45%]  bg-white shadow-lg rounded-lg p-4'>
-                    <img className="w-full rounded-lg" src="https://sailingwithmasters.com/wp-content/uploads/2020/07/kung-fu-panda-oogway-prophecy.jpg?w=640" alt="project img" />
-                    <h1 className="text-gray-800 font-semibold text-lg">Post 1</h1>
-                    <p className="text-gray-500 text-[14px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</p>
-                    <p className="text-gray-800 text-[14px] font-semibold "> <span>200 likes</span> <span>134 comments</span> </p>
-                  </div>  duplicate data*/}
-                </div>
+                    <p className="text-gray-500 text-[14px]">{post.description}</p>
+                    <p className="text-gray-800 text-[14px] font-semibold "> <span>{post?.likes?.length} likes</span> <span>{post?.comments?.length} comments</span> </p>
+                  </div> ))
+              }
+              {/* <div className='w-full md:w-[45%]   bg-white shadow-lg rounded-lg p-4'>
+                <img className="w-full rounded-lg" src="https://sailingwithmasters.com/wp-content/uploads/2020/07/kung-fu-panda-oogway-prophecy.jpg?w=640" alt="project img" />
+                <h1 className="text-gray-800 font-semibold text-lg">Post 1</h1>
+                <p className="text-gray-500 text-[14px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</p>
+                <p className="text-gray-800 text-[14px] font-semibold "> <span>200 likes</span> <span>134 comments</span> </p>
               </div>
+              <div className='w-full md:w-[45%]  bg-white shadow-lg rounded-lg p-4'>
+                <img className="w-full rounded-lg" src="https://sailingwithmasters.com/wp-content/uploads/2020/07/kung-fu-panda-oogway-prophecy.jpg?w=640" alt="project img" />
+                <h1 className="text-gray-800 font-semibold text-lg">Post 1</h1>
+                <p className="text-gray-500 text-[14px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</p>
+                <p className="text-gray-800 text-[14px] font-semibold "> <span>200 likes</span> <span>134 comments</span> </p>
+              </div>  duplicate data */}
+            </div>
+          </div>
+
+              
             </div>
           </div>
     
@@ -216,4 +218,4 @@ const [isConnected, setIsConnected] = useState(false);
   )
 }
 
-export default ProfileDetails
+export default ProfileDetails ;

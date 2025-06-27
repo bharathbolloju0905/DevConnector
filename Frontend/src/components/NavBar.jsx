@@ -53,17 +53,17 @@ const NavBar = ({ setPosts, posts }) => {
   }
 
   return (
-    <div className='w-full md:h-14 h-12 flex items-center justify-between md:px-4 fixed bg-white z-10 shadow-md '>
+    <div className='w-full md:h-14 h-12 flex items-center justify-between p-2 md:px-4 fixed bg-white z-10 shadow-md '>
       <div>
         <h1 className="text-[#4C4EE7] text-sm md:text-xl lg:text-2xl font-bold">
           <span className='text-sm md:text-xl lg:text-2xl font-bold'>&lt;</span>DevConnector/<span className='text-sm md:text-xl lg:text-2xl font-bold'>&gt;</span>
         </h1>
       </div>
 
-      <div className='relative w-1/3'>
-        <CiSearch className='absolute text-gray-500 top-1 left-4 md:h-6 md:w-6 h-4 w-4  top-4  font-bold' />
+      <div className='relative w-[55%] md:w-1/3 h-full'>
+        <CiSearch className='absolute text-gray-500  left-0 h-6 w-6 top-[12%]  font-bold' />
         <input
-          className='w-full md:text-lg md:pl-[3rem] pl-[1rem] text-xs border border-black rounded-md text-gray-800 focus:border-purple-500'
+          className='w-full h-full md:text-lg md:pl-[3rem] pl-[2rem] text-xs border border-black rounded-md text-gray-800 focus:border-purple-500'
           type="text"
           placeholder='Search for post , friends or topics...'
           value={input}
@@ -82,7 +82,7 @@ const NavBar = ({ setPosts, posts }) => {
         </div>
         <div className='flex '>
           <h1 className='text-gray-800 font-semibold text-md hidden md:flex lg:flex'>{user?.fullname}</h1>
-          <IoIosArrowDown className='text-gray-500 md:h-[25px] md:w-[25px] h-[20px] w-[20px] font-bold cursor-pointer' onClick={() => setIsOpen(!isOpen)} />
+          <IoIosArrowDown className='text-gray-500 md:h-[25px] md:w-[25px] h-[20px] w-[20px] font-bold cursor-pointer z-auto' onClick={() => setIsOpen(!isOpen)} />
         </div>
       </div>
 

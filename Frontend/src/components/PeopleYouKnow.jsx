@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import People from './People'
 import axios from 'axios'
-import {useUserContext} from '../context/UserContext'
+import {useUserContext} from '../Context/UserContext'
 
 
 
@@ -37,7 +37,6 @@ const PeopleYouKnow = () => {
             {people?.map((person) => (
                 <People key={person._id} person={person} />
             ))}
-            <People></People>
            
         </ul>
     </div>

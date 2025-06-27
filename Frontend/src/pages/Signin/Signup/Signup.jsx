@@ -15,6 +15,7 @@ const Signup = () => {
         confirmpassword: ""
     })
     // const navigate = useNavigate() ;
+
     const handleChange = (e) => {
         setInput({
             ...input,
@@ -29,15 +30,15 @@ const Signup = () => {
     }
   return (
     <div className='h-screen w-full flex '>
-    <div className='h-screen w-1/2 bg-[#e7effe] flex items-center justify-center'>
-        <div className='flex flex-col items-start justify-center gap-[2rem] w-2/4'>
+    <div className='h-screen w-full lg:w-1/2 bg-[#e7effe] flex items-center justify-center'>
+        <div className='flex flex-col items-start justify-center gap-1 w-2/4'>
             <div className='w-full'>
                 <h1 className='text-3xl font-bold'>DevConnector</h1>
                 <p className='text-sm text-gray-500'>Connect with developers around the world</p>
             </div>
             <div className='w-full '>
                 <h2 className='text-2xl font-bold'> Create Your Account</h2>
-                <form className='w-full flex flex-col gap-4 mt-4' onSubmit={handleSubmit}>
+                <form className='w-full flex flex-col gap-2 mt-4' onSubmit={handleSubmit}>
                     <label htmlFor="na,e" className='text-sm text-gray-600'>Full name</label>
                     <input type="text" name="fullname" id="fullname" className='w-full h-12 border border-gray-300 rounded-md px-4 bg-white' placeholder='Enter your Fullname' value={input.fullname} onChange={handleChange} required />
 
@@ -57,7 +58,7 @@ const Signup = () => {
 
         </div>
     </div>
-    <div className='hidden h-screen w-1/2 bg-[#4C4EE7] flex items-center justify-center flex-col lg:flex  '>
+    <div className='hidden h-screen lg:w-1/2 bg-[#4C4EE7]  items-center justify-center flex-col lg:flex  '>
         <div className='flex flex-col items-center justify-center gap-[2rem] w-2/4'>
             <div className='w-full rounded-lg overflow-hidden'>
                 <img src="./src/assets/signup.jpg" alt="signin image" className='object-contain w-fit' />
@@ -77,4 +78,5 @@ const Signup = () => {
   )
 }
 
-export default Signup
+
+export default Signup ;
