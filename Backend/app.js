@@ -28,7 +28,7 @@ app.use(express.json());
 dotenv.config();
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://dev-connector-seven.vercel.app/'],
+  origin: ['http://localhost:5173','https://dev-connector-seven.vercel.app'],
   credentials: true,
 }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

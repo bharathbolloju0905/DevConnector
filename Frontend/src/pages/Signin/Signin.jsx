@@ -51,7 +51,7 @@ const Signin = () => {
             <div className='h-screen lg:w-1/2 bg-[#4C4EE7] lg:flex items-center justify-center flex-col hidden '>
                 <div className='flex flex-col items-center justify-center gap-[2rem] w-2/4'>
                     <div className='w-full rounded-lg overflow-hidden'>
-                        <img src="./src/assets/team.jpg" alt="signin image" className='object-contain w-fit' />
+                        <img src="./team.jpg" alt="signin image" className='object-contain w-fit' />
                     </div>
                     <div className='w-full text-white flex flex-col items-start justify-center gap-4'>
                         <h1 className='text-2xl font-bold'>Join our global developer community</h1>

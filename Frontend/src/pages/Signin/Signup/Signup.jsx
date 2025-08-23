@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 
+
 const Signup = () => {
     const { signup, loading } = SignupHook();
     const navigate = useNavigate();
@@ -60,7 +61,7 @@ const Signup = () => {
             <div className='hidden h-screen lg:w-1/2 bg-[#4C4EE7]  items-center justify-center flex-col lg:flex  '>
                 <div className='flex flex-col items-center justify-center gap-[2rem] w-2/4'>
                     <div className='w-full rounded-lg overflow-hidden'>
-                        <img src="./src/assets/signup.jpg" alt="signin image" className='object-contain w-fit' />
+                        <img src="/signup.jpg" alt="signup  image" className='object-contain w-fit' />
                     </div>
                     <div className='w-full text-white flex flex-col items-start justify-center gap-4'>
                         <h1 className='text-2xl font-bold'>Start your developer journey today</h1>
