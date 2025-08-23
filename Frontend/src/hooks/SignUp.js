@@ -14,7 +14,7 @@ const SignUpHook = () => {
         }
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:3000/api/register', {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -22,11 +22,6 @@ const SignUpHook = () => {
                 body: JSON.stringify({ fullname, email, password ,confirmpassword}),
                 credentials: 'include'
             });
-
-            if (!response.ok) {
-                throw new Error('Failed to sign up');
-            }
-
             const data = await response.json();
            
             console.log(data);
@@ -37,7 +32,7 @@ const SignUpHook = () => {
                 
             } else {
                 toast.error('Sign up failed');
-                navigate("/")
+                navigate("/signup")
             }
         } catch (error) {
             console.error(error);

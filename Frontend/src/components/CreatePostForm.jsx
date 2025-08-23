@@ -65,7 +65,7 @@ const [loading,setLoading] = useState(false)
   };
 
   return (
-    <div  ref={ref} className="bg-white p-4 rounded-xl shadow-xl  mb-6 absolute md:top-35 lg:top-30 md:left-  [10%] lg:left-[20%] md:w-[80%] lg:w-[60%] z-10 h-auto  ">
+    <div  ref={ref} className="bg-white p-4 rounded-xl shadow-xl  mb-6 absolute w-[80%] top-35 lg:top-30 left-[10%] lg:left-[20%] md:w-[80%] lg:w-[60%] z-10 h-auto  ">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex items-start gap-4">
           <img

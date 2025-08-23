@@ -11,6 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Profile from './pages/Profile/Profile'
 import ProfileDetails from './pages/Profile/ProfileDetails'
 import MessagingPage from './pages/Messages/MessagingPage';
+import NotFound from './pages/NotFound/NotFound'
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
         <Route path="/profile" element={<ProtectedRoute><Profile/> </ProtectedRoute>} />     
         <Route path="/profiles/:userId" element={<ProtectedRoute><ProfileDetails/> </ProtectedRoute>} />     
         <Route path="/messages/:userId" element={<ProtectedRoute><MessagingPage /></ProtectedRoute>} />
-        <Route path="*" element={<Signin />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   )

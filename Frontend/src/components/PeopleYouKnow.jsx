@@ -13,7 +13,6 @@ const PeopleYouKnow = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //this is the endpoint to fetch people you know and with similar interests
         const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/people-you-know`, {
           withCredentials: true,
       } );

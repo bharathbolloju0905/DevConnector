@@ -22,11 +22,11 @@ module.exports.ConnectUser = async(req,res)=>{
             return res.status(201).json({ message: "Already connected" });
         }
         // Add the person to the user's connections
-        user.followers.push(personId);
+        user?.following.push(personId);
         await user.save();
 
-        person.following.push(userId);
-        await person.save();
+        person?.followers.push(userId);
+        await person?.save();
 
         return res.status(201).json({ message: "Connection successful" });
     } catch (error) {

@@ -69,7 +69,7 @@ const EditProfile = () => {
         setisopen(false);
     }
 
-    // Handler for file input
+  
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {

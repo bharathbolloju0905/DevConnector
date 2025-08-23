@@ -25,7 +25,7 @@ const Signin = () => {
 
     return (
         <div className='h-screen w-full flex '>
-            <div className='h-screen w-1/2 bg-[#e7effe] flex items-center justify-center'>
+            <div className='h-screen w-full lg:w-1/2 bg-[#e7effe] flex items-center justify-center'>
                 <div className='flex flex-col items-start justify-center gap-[2rem] w-2/4'>
                     <div className='w-full'>
                         <h1 className='text-3xl font-bold'>DevConnector</h1>
@@ -48,7 +48,7 @@ const Signin = () => {
 
                 </div>
             </div>
-            <div className='h-screen w-full lg:w-1/2 bg-[#4C4EE7] lg:flex items-center justify-center flex-col hidden '>
+            <div className='h-screen lg:w-1/2 bg-[#4C4EE7] lg:flex items-center justify-center flex-col hidden '>
                 <div className='flex flex-col items-center justify-center gap-[2rem] w-2/4'>
                     <div className='w-full rounded-lg overflow-hidden'>
                         <img src="./src/assets/team.jpg" alt="signin image" className='object-contain w-fit' />

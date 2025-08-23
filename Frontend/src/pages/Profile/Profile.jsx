@@ -19,7 +19,7 @@ const Profile = () => {
     <div className="flex flex-col w-fulll h-screen ">
       <Link to="/home"><FaArrowLeftLong className="bg-[#4C4EE7] text-white rounded-full h-10 w-10 md:h-8 md:w-8 absolute top-4 left-4 p-2" /></Link>
       {isopen && <EditProfile></EditProfile>}
-      <div className="w-full h-fit md:h-[40%] bg-[#3b3fd9] flex flex-col justify-center items-center md:items-start md:justify-center p-10  pb-3">
+      <div className="w-full h-fit md:h-[40%] bg-[#3b3fd9] flex flex-col items-center md:flex-row md:items-end justify-center p-10  pb-3">
         <img
           className="h-32 w-32 rounded-full"
           src={`${import.meta.env.VITE_BASE_URL}${user?.profilepic}`}
@@ -52,8 +52,11 @@ const Profile = () => {
             <h1 className="text-gray-800 font-semibold text-xl">Skills</h1>
             <div>
               <ul className="flex  gap-2 mt-2 flex-wrap">
-                <li className="text-[#5b2f8d] text-[10px] font-semibold p-2 bg-[#c4b4d8] rounded-lg">HTML</li>
-                <li className="text-[#5b2f8d] text-[10px] font-semibold p-2 rounded-lg bg-[#c4b4d8]">CSS</li>
+                {
+                  user?.skills?.length === 0 && (
+                    <li className="text-gray-500 text-[10px] font-semibold p-2 bg-gray-200 rounded-lg">Add Your Skills</li>
+                  )
+                }
                 {
                   user?.skills?.map((skill, index) => (
                     <li key={index} className="text-[#5b2f8d] text-[10px] font-semibold p-2 bg-[#c4b4d8] rounded-lg">{skill}</li>
@@ -85,6 +88,12 @@ const Profile = () => {
           <div className="w-full h-fit bg-white shadow-lg rounded-lg p-4">
             <h1 className="text-gray-800 font-semibold text-xl">Experience</h1>
             {
+              user?.experience.length === 0 && (
+                <div className="w-full text-center py-4">
+                  <p className="text-gray-500">Add Your Experience Details</p>
+                </div>
+              )}
+            {
               user?.experience.map((exp, index) => (
                 <div key={index} className="flex gap-2 mt-2">
                   <div className="p-3 bg-[#c4b4d8] rounded-full w-[40px] h-fit mt-2 inline-flex items-center justify-center">
@@ -98,21 +107,19 @@ const Profile = () => {
                 </div>
               ))
             }
-            <div className="flex gap-2 mt-2">
-              <div className="p-3 bg-[#c4b4d8] rounded-full w-[40px] h-fit mt-2 inline-flex items-center justify-center">
-                <  PiHandbagFill className="h-5 w-5" />
-              </div>
-              <div className="flex flex-col gap-2 mt-2">
-                <h1 className="text-gray-800 font-semibold text-lg">Full Stack Developer</h1>
-                <p className="text-gray-500 text-[14px]">Aug 2024 - Feb-2025</p>
-                <p className="text-gray-500 text-[14px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue.</p>
-              </div>
-            </div>
+           
 
           </div>
           {/* Education */}
           <div className="w-full h-fit bg-white shadow-lg rounded-lg p-4 mt-4">
             <h1 className="text-gray-800 font-semibold text-xl">Education</h1>
+            {
+              user?.education.length === 0 && (
+                <div className="w-full text-center py-4">
+                  <p className="text-gray-500">Add Your Educational Details</p>
+                </div>
+              )}
+            
             {
               user?.education.map((edu, index) => (
                 <div key={index} className="flex gap-2 mt-2">
@@ -127,22 +134,18 @@ const Profile = () => {
                 </div>
               ))
             }
-            <div className="flex gap-2 mt-2">
-              <div className="p-3 bg-[#c4b4d8] rounded-full w-[40px] h-fit mt-2 inline-flex items-center justify-center">
-                <  FaGraduationCap className="h-5 w-5" />
-              </div>
-              <div className="flex flex-col gap-2 mt-2">
-                <h1 className="text-gray-800 font-semibold text-lg">Bacholor of Technology</h1>
-                <p className="text-gray-500 text-[14px]">JNTU Hyderabad</p>
-                <p className="text-gray-500 text-[14px]">Aug 2024 - Feb-2025</p>
-              </div>
-            </div>
           </div>
 
           {/* Projects  or Posts */}
           <div className="w-full h-[400px] bg-white shadow-lg rounded-lg p-4 mt-4 ">
             <h1 className="text-gray-800 font-semibold text-xl">Post</h1>
             <div className="flex flex-wrap w-full gap-4 mt-2 overflow-y-auto h-full">
+              {
+                user?.posts?.length === 0 && (
+                  <div className="w-full text-center py-4">
+                    <p className="text-gray-500">No posts available</p>
+                  </div>
+                )}
               {
                 user?.posts?.map((post, index) => (
                   <div className='w-full md:w-[45%]  bg-white shadow-lg rounded-lg p-4' key={index}>
@@ -152,18 +155,7 @@ const Profile = () => {
                     <p className="text-gray-800 text-[14px] font-semibold "> <span>{post?.likes?.length} likes</span> <span>{post?.comments?.length} comments</span> </p>
                   </div> ))
               }
-              {/* <div className='w-[45%]  bg-white shadow-lg rounded-lg p-4'>
-                <img className="w-full rounded-lg" src="https://sailingwithmasters.com/wp-content/uploads/2020/07/kung-fu-panda-oogway-prophecy.jpg?w=640" alt="project img" />
-                <h1 className="text-gray-800 font-semibold text-lg">Post 1</h1>
-                <p className="text-gray-500 text-[14px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</p>
-                <p className="text-gray-800 text-[14px] font-semibold "> <span>200 likes</span> <span>134 comments</span> </p>
-              </div>
-              <div className='w-[45%]  bg-white shadow-lg rounded-lg p-4'>
-                <img className="w-full rounded-lg" src="https://sailingwithmasters.com/wp-content/uploads/2020/07/kung-fu-panda-oogway-prophecy.jpg?w=640" alt="project img" />
-                <h1 className="text-gray-800 font-semibold text-lg">Post 1</h1>
-                <p className="text-gray-500 text-[14px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.</p>
-                <p className="text-gray-800 text-[14px] font-semibold "> <span>200 likes</span> <span>134 comments</span> </p>
-              </div>  duplicate data*/}
+             
             </div>
           </div>
         </div>

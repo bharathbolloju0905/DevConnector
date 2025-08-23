@@ -7,20 +7,18 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    // Initialize socket connection
-    const newSocket = io("http://localhost:3000", {
+    
+    const newSocket = io(`${import.meta.env.VITE_BASE_URL}`, {
       transports: ["websocket"],
     });
 
     setSocket(newSocket);   
 
-    // Cleanup on unmount
     return () => {
       newSocket.disconnect();
     };
   }, []);
 
-  // Function to listen to a specific event
   const receiveMessage = (event, callback) => {
     if (socket) {
       console.log("socket",socket)
@@ -28,7 +26,6 @@ export const SocketProvider = ({ children }) => {
     }
   };
 
-  // Function to emit a specific event
   const sendMessage = (event, data) => {
     if (socket) {
       socket.emit(event, data);

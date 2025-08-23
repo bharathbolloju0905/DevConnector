@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {toast} from 'react-hot-toast'
 const useUpdateDetails = () =>{
     const [loading,setloading] = useState(false);
-    const {setUser} = useUserContext();
+    const {user,setUser} = useUserContext();
     const navigate = useNavigate();
     const updateDetails = async({ inputdetails,skills,experience,education,image: profileImage}) =>{
         setloading(true);
@@ -18,7 +18,7 @@ const useUpdateDetails = () =>{
         }
 
         try {
-            const response = await fetch('http://localhost:3000/api/uploads/updateDetails', {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/uploads/updateDetails`, {
                 method: 'POST',
                 body: formData,
                 headers: {

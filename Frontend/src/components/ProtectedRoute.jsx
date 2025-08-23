@@ -2,14 +2,16 @@ import { useUserContext } from '../Context/UserContext';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  const { user } = useUserContext();
+  const { user, loading } = useUserContext();
 
-  // if (!user) {
-  //   // Not logged in, redirect to login page
-  //   return <Navigate to="/signin" replace />;
-  // }
+  if (loading) {
+    return <div>Loading...</div>; 
+  }
 
-  // // Logged in, render the page
+  if (!user) {
+    return <Navigate to="/signin" replace />;
+  }
+
   return children;
 };
 

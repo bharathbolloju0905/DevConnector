@@ -5,12 +5,15 @@ import { IoIosArrowDown } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useUserContext } from '../Context/UserContext';
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-const NavBar = ({ setPosts, posts }) => {
+import toast  from 'react-hot-toast';
+
+const NavBar = ({ setPosts, posts, fetchPosts }) => {
   const { user } = useUserContext();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
-  const [localpost, setLocalPost] = useState(posts);
+  const navigate = useNavigate();
   useEffect(() => {
 
 
@@ -35,23 +38,35 @@ const NavBar = ({ setPosts, posts }) => {
   function handleChange(e) {
     const value = e.target.value;
     setInput(value);
-
     if (value.length === 0) {
-      // Reset posts to original state if input is cleared
-      setLocalPost(posts);
-      setPosts(posts); // Also update the parent posts if needed
+ 
+      fetchPosts(); 
       return;
     }
 
     if (value.length > 3) {
       const filtered = posts.filter((post) => {
-        return post.description.toLowerCase().includes(value.toLowerCase());
+        return (
+          post.description.toLowerCase().includes(value.toLowerCase()) ||
+          post.userId.fullname.toLowerCase().includes(value.toLowerCase())
+        );
       });
-      setLocalPost(filtered);
-      setPosts(filtered); // Also update the parent posts if needed
+    
+      setPosts(filtered); 
     }
   }
 
+  const handleLogout = async () => {
+    try {
+      await axios.get(`${import.meta.env.VITE_BASE_URL}/api/logout`,{
+        withCredentials: true,
+      });
+      navigate('/login'); 
+      toast.success('Logged out successfully');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };  
   return (
     <div className='w-full md:h-14 h-12 flex items-center justify-between p-2 md:px-4 fixed bg-white z-10 shadow-md '>
       <div>
@@ -63,7 +78,7 @@ const NavBar = ({ setPosts, posts }) => {
       <div className='relative w-[55%] md:w-1/3 h-full'>
         <CiSearch className='absolute text-gray-500  left-0 h-6 w-6 top-[12%]  font-bold' />
         <input
-          className='w-full h-full md:text-lg md:pl-[3rem] pl-[2rem] text-xs border border-black rounded-md text-gray-800 focus:border-purple-500'
+          className='w-full h-full md:text-lg md:pl-[3rem] lg:pl-[30px] lg:text-[16px] pl-[2rem] text-xs border border-black rounded-md text-gray-800 focus:border-purple-500'
           type="text"
           placeholder='Search for post , friends or topics...'
           value={input}
@@ -89,8 +104,8 @@ const NavBar = ({ setPosts, posts }) => {
       <div className={`absolute right-[5rem] z-11 top-[4rem] bg-white shadow-lg rounded-md p-1 w-40 group-hover:block ${isOpen ? 'block' : 'hidden'}`}>
         <ul className='flex flex-col gap-2 w-full justify-center'>
           <li className='hover:bg-gray-100 w-full m-1'><Link to='/profile'>Your Profile</Link></li>
-          <li className='hover:bg-gray-100 w-full m-1'><Link to='/settings'>Settings</Link></li>
-          <li className='hover:bg-gray-100 w-full m-1'><Link to='/logout'>Logout</Link></li>
+          <li className='hover:bg-gray-100 w-full m-1'><Link to='/profile'>Settings</Link></li>
+          <li className='hover:bg-gray-100 w-full m-1' onClick={handleLogout}>Logout</li>
         </ul>
       </div>
     </div >

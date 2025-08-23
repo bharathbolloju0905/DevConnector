@@ -7,7 +7,7 @@ import {useSocketContext} from "../../Context/SocketContext";
 const MessagingPage = () => {
   const { userId: recipientId } = useParams();
   const location = useLocation();
-  const { person: initialRecipientInfo } = location.state || {};
+  const { profile : initialRecipientInfo } = location.state || {};
   const { user: currentUser } = useUserContext();
   const { socket,sendMessage,receiveMessage} = useSocketContext();
 
