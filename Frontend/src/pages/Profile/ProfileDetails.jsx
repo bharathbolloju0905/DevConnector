@@ -92,7 +92,7 @@ const [isConnected, setIsConnected] = useState(false);
           <div className="w-full h-fit md:h-[40%] bg-[#3b3fd9] flex flex-col items-center md:flex-row md:items-end justify-center p-10  pb-3">
             <img
               className="h-32 w-32 rounded-full"
-              src={`${import.meta.env.VITE_BASE_URL}${profile?.profilepic}`}
+              src={`${profile?.profilepic}`}
               alt="profile img"
             />
             <div className="w-full flex flex-col  md:justify-between">
@@ -218,7 +218,7 @@ const [isConnected, setIsConnected] = useState(false);
               {
                 profile?.posts?.map((post, index) => (
                   <div className='w-full md:w-[45%]  bg-white shadow-lg rounded-lg p-4' key={index}>
-                    <img className="w-full rounded-lg" src={`${import.meta.env.VITE_BASE_URL}${post?.image}`} alt="project img" />
+                    <img className="w-full rounded-lg" src={`${post?.image}`} alt="project img" />
                     <h1 className="text-gray-800 font-semibold text-lg">Post 1</h1>
                     <p className="text-gray-500 text-[14px]">{post.description}</p>
                     <p className="text-gray-800 text-[14px] font-semibold "> <span>{post?.likes?.length} likes</span> <span>{post?.comments?.length} comments</span> </p>

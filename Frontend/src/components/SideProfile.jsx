@@ -6,7 +6,7 @@ const SideProfile = () => {
   return (
     <div className='flex flex-col items-center justify-start w-[75%] h-fit bg-white shadow-lg rounded-lg p-4 mt-4 ml-[6rem]'>
       <div>
-        <img className='h-[70px] w-[70px] rounded-full' src={`${import.meta.env.VITE_BASE_URL}${user?.profilepic}`} alt="profile img" />
+        <img className='h-[70px] w-[70px] rounded-full' src={user?.profilepic} alt="profile img" />
       </div>
       <div className='flex flex-col items-center justify-center mt-4'>
         <h1 className='text-gray-800 font-semibold'>{user?.fullname}</h1>

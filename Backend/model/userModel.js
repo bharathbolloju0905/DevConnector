@@ -19,7 +19,7 @@ const userSchema =  mongoose.Schema({
     },
     profilepic:{
         type: String,
-        default: "/uploads/defaultimage.jpeg"
+        default: "https://res.cloudinary.com/dq8bvbhrj/image/upload/v1756053965/defaultimage_ln9ekd.jpg"
     },
     profession:{
         type: String,

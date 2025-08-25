@@ -92,7 +92,7 @@ const NavBar = ({ setPosts, posts, fetchPosts }) => {
 
 
         <div >
-          <img className='md:h-[30px] md:w-[30px] w-[20px] h-[20px] rounded-full' src={`${import.meta.env.VITE_BASE_URL}${user?.profilepic}`}
+          <img className='md:h-[30px] md:w-[30px] w-[20px] h-[20px] rounded-full' src={`${user?.profilepic}`}
             alt="user" />
         </div>
         <div className='flex '>

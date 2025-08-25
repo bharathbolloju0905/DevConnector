@@ -23,10 +23,9 @@ const MessagingPage = () => {
 
   useEffect(() => {
     scrollToBottom();
-    
   }, [messages]);
 
-  // Effect to fetch recipient info if not available
+ 
   useEffect(() => {
     if (!recipientInfo && recipientId) {
       const fetchRecipientDetails = async () => {
@@ -153,7 +152,7 @@ const MessagingPage = () => {
             <FaArrowLeftLong className="text-gray-600 h-5 w-5 hover:text-[#4C4EE7]" />
           </Link>
           <img
-            src={recipientInfo?.profilepic?.startsWith('http') ? recipientInfo.profilepic : `${import.meta.env.VITE_BASE_URL}${recipientInfo?.profilepic}`}
+            src={recipientInfo?.profilepic?.startsWith('http') ? recipientInfo.profilepic : `${recipientInfo?.profilepic}`}
             alt={recipientInfo?.fullname}
             className="h-10 w-10 rounded-full mr-3 object-cover"
           />

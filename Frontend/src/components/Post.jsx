@@ -41,7 +41,7 @@ catch(err){
     <div className='w-full h-[600px] bg-white shadow-lg rounded-lg p-4 mt-4'>
         <div className='flex items-center justify-start gap-4 cursor-pointer' onClick={handleWatchProfile}>
             <div>
-                <img className='h-10 w-10 rounded-full' src={`${import.meta.env.VITE_BASE_URL}${post?.userId?.profilepic}`} alt="" />
+                <img className='h-10 w-10 rounded-full' src={`${post?.userId?.profilepic}`} alt="" />
             </div>
             <div>
                 <h1 className='text-md font-semibold'>{post?.userId?.fullname}</h1>
@@ -52,7 +52,7 @@ catch(err){
                 <p className='text-ellipsis w-full overflow-hidden text-sm'>{post?.description}</p>
             </div>
         <div className='h-[300px] md:h-[350px] w-[90%] '>
-            <img className='h-full w-full rounded-md m-2 object-fit' src={`${import.meta.env.VITE_BASE_URL}${post?.image}`} alt="" />
+            <img className='h-full w-full rounded-md m-2 object-fit' src={post?.image} alt="postImage" />
         </div>
         <div className='flex items-center gap-4 w-full h-12 mt-4'>
             <div> {isLiked? <VscHeartFilled className='h-[20px] w-[20px] cursor-pointer text-red-800' onClick={handleLike}></VscHeartFilled>:<FaRegHeart className='h-[20px] w-[20px] cursor-pointer' onClick={handleLike}></FaRegHeart> } {likes} Likes</div> <div> <FiMessageCircle  className='h-[20px] w-[20px] cursor-pointer'></FiMessageCircle> Comments</div>

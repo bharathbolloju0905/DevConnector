@@ -6,7 +6,7 @@ function initSocket(httpServer) {
   if (!io) {
     io = new Server(httpServer, {
       cors: {
-        origin: "http://localhost:5173",
+        origin: "https://dev-connector-seven.vercel.app", 
         methods: ["GET", "POST"],
         credentials: true,
       },
@@ -25,7 +25,7 @@ function initSocket(httpServer) {
       socket.on("sendMessage", (msg) => {
         if (msg && msg.roomId) {
           console.log("Message received from socket:", msg);
-          // Emit the message to the room
+          
           io.to(msg.roomId).emit("receiveMessage", msg);
         }
       });

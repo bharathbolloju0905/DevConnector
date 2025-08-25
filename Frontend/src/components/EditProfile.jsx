@@ -85,7 +85,7 @@ const EditProfile = () => {
                 <RxCross2 className='h-5 w-5 absolute top-2 right-2 cursor-pointer' onClick={() => setisopen(!isopen)} />
                 <div className='flex flex-col md:flex-row justify-center w-full gap-2 mt-4'>
                     <div>
-                        <img className='h-25 w-25 rounded-full' src={`${import.meta.env.VITE_BASE_URL}${user?.profilepic}`} alt="" />
+                        <img className='h-25 w-25 rounded-full' src={`${user?.profilepic}`} alt="profilepic" />
                     </div>
                     <div className='flex flex-col items-start justify-center '>
                         <h2 className='text-lg font-semibold'>Profile photo</h2>

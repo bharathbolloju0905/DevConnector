@@ -7,13 +7,15 @@ module.exports.getUploadedImage = async (req, res) => {
     try {
         const file = req.file;
         const { description } = req.body;
+        console.log(file);
         if (!description) {
             return res.status(400).json({ message: 'Description is required' });
         }
         if (!file) {
             return res.status(400).json({ message: 'No file uploaded' });
         }
-        const filePath = `/uploads/${file.filename}`;
+       const filePath = req.file.path; 
+       console.log('File uploaded to:', filePath);
         const userId = req.user.id;
         const newpost = await postModel.create({
             description,
@@ -59,7 +61,7 @@ module.exports.getUpdateDetails = async (req, res) => {
         // }
        
         // const filePath = `/${file?.filename}`;
-        const filfilePath = file ? `/uploads/${file.filename}` : '/uploads/defaultimage.jpeg';
+        const filePath = file ? req.file.path : 'https://res.cloudinary.com/dq8bvbhrj/image/upload/v1756053965/defaultimage_ln9ekd.jpg';
 
         const updated = await userModel.findByIdAndUpdate(
             req.user.id,
@@ -69,7 +71,7 @@ module.exports.getUpdateDetails = async (req, res) => {
                     email: inputdetails.email,
                     bio: inputdetails.bio,
                     profession: inputdetails.profession,
-                    profilepic: filfilePath,
+                    profilepic: filePath,
                     contact: {
                         website: inputdetails.website,
                         github: inputdetails.github,

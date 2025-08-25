@@ -69,7 +69,7 @@ const [loading,setLoading] = useState(false)
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex items-start gap-4">
           <img
-            src={`${import.meta.env.VITE_BASE_URL}${user?.profilepic}`}
+            src={`${user?.profilepic}`}
             alt="user"
             className="w-12 h-12 rounded-full"
           />

@@ -16,7 +16,7 @@ const People = ({person}) => {
     return (
         <li className='flex justify-between items-center pt-1.5 cursor-pointer' onClick={handleClick}>
             <div className='flex items-center gap-2'>
-                <img className='h-10 w-10 rounded-full' src={`${import.meta.env.VITE_BASE_URL}${person?.profilepic}`} alt="profile img" />
+                <img className='h-10 w-10 rounded-full' src={`${person?.profilepic}`} alt="profile img" />
                <div>
                     <h1 className='text-gray-800 font-semibold'>{person?.fullname}</h1>
                     <p className='text-gray-500 text-xs'>{person?.profession}</p>
