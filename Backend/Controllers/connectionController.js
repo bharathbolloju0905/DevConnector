@@ -17,7 +17,7 @@ module.exports.ConnectUser = async(req,res)=>{
             return res.status(404).json({ message: "User or person not found" });
         }
         // Check if the connection already exists
-        const existingConnection = user.followers.find(conn => conn.toString() === personId);
+        const existingConnection = user.followings.find(conn => conn.toString() === personId);
         if (existingConnection) {
             return res.status(201).json({ message: "Already connected" });
         }

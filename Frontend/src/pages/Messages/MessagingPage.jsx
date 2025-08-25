@@ -4,6 +4,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { useUserContext } from "../../Context/UserContext";
 import axios from 'axios';
 import {useSocketContext} from "../../Context/SocketContext";
+
 const MessagingPage = () => {
   const { userId: recipientId } = useParams();
   const location = useLocation();
@@ -16,6 +17,7 @@ const MessagingPage = () => {
   const [input, setInput] = useState("");
   const messagesEndRef = useRef(null);
   const [chatRoomId, setChatRoomId] = useState(null);
+  const audio = new Audio("/message.mp3");
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -119,6 +121,7 @@ const MessagingPage = () => {
       
       setMessages((prevMessages) => [...prevMessages, msg]); // Optimistic update
       sendMessage("sendMessage", msg);
+      audio.play().catch(err => console.error("Audio play error:", err));
       setInput("");
 
       try {
